@@ -1,0 +1,122 @@
+COMPLETE LIST OF MODALS - BOOKING SYSTEM WEBSITE
+====================================================
+
+MAIN DASHBOARD (index.php)
+---------------------------
+- quickBookingModal: "Quick Book - Today"
+
+USER MANAGEMENT (users.php)
+---------------------------
+- addUserModal: "Add Staff User"
+- editUserModal: "Edit Staff User"
+- resetPasswordModal: "Reset Password"
+- deleteModal: "Confirm Delete"
+
+PROFILE (profile.php)
+---------------------
+- profilePictureModal: "Update Profile Picture"
+
+SETTINGS (settings.php)
+-----------------------
+- logoUploadModal: "Upload Company Logo"
+
+PACKAGES (packages.php)
+-----------------------
+- editPackageModal: "Edit Package"
+- createPackageModal: "Create Package"
+
+PACKAGE ADD-ONS (package-addons.php)
+------------------------------------
+- editAddonModal: "Edit Add-on"
+
+MEMBERSHIP PACKAGES (membership-packages.php)
+---------------------------------------------
+- editMembershipModal: "Edit Membership"
+- newMembershipModal: "Create New Membership"
+
+MEMBERS (members.php)
+---------------------
+- addMemberModal: "Add Member"
+- editMemberModal: "Edit Member"
+
+GIFT CERTIFICATES (gift-certificates.php)
+-----------------------------------------
+- editGiftCertModal: "Edit Gift Certificate"
+- createGiftCertModal: "Create Gift Certificate"
+
+PROMO CODES (promo-codes.php)
+-----------------------------
+- editCouponModal: "Edit Promo Code"
+
+PAYMENT (payment.php)
+---------------------
+- editPayPalProModal: "Payment Settings"
+
+GROUP DISCOUNTS (group-discounts.php)
+-------------------------------------
+- checkInModal: "Manual Check-in"
+
+EMAIL TEMPLATES (email-templates.php)
+-------------------------------------
+- campaignSettingsModal: "Campaign Settings"
+
+EMAIL MANAGE LISTS (email-manage-lists.php)
+-------------------------------------------
+- createListModal: "Create New Email List"
+- importModal: "Import Subscribers"
+- campaignSettingsModal: "Campaign Settings"
+- listCampaignModal: "List Campaign"
+- addToListModal: "Add Subscriber to List"
+
+CALENDAR SCHEDULE (apps-calendar-schedule.php)
+----------------------------------------------
+- event-modal: "Calendar Event"
+
+FOOTER/SHARED MODALS (partials/footer.php)
+------------------------------------------
+- bookingModal: "{Group Name} Booking"
+- registerBookingModal: "Register New Booking"
+- dateTimeModal: "Booking Date & Time"
+- event-modal: "{Selected Date} Package Settings"
+- createGoupModal: "Create Group"
+- editGoupModal: "Edit Group"
+- updateImageModal: "Update Image"
+- embedCodeModal: "{Package Title} Embed Code"
+- deleteModal: "Confirm Deletion of {Item Name}"
+- liveWaiverModal: "Live Waiver"
+- userWaiverModal: "User Waiver"
+- notesModal: "Notes"
+- bookingNotesModal: "Booking Notes"
+- editWaiverModal: "Edit Waiver"
+- groupAssignModal: "Group Assignment"
+- checkInModal: "Manual Check-in"
+
+NAVIGATION MODALS (partials/main-nav.php)
+-----------------------------------------
+- editWaiverModal: "Edit Waiver" (linked from nav)
+- liveWaiverModal: "Live Waiver" (linked from nav)
+
+TOPBAR MODALS (partials/topbar.php)
+-----------------------------------
+- bookingModal: "Quick Access Booking" (linked from topbar)
+
+TOTAL MODAL COUNT: 34 unique modals
+
+MODAL CATEGORIES:
+================
+1. User Management: 4 modals
+2. Booking Management: 7 modals
+3. Package Management: 5 modals
+4. Member Management: 3 modals
+5. Financial Management: 3 modals
+6. Email Management: 5 modals
+7. Settings/Configuration: 4 modals
+8. Shared Utilities: 3 modals (delete, image upload, embed code)
+
+MOST FREQUENTLY USED MODALS:
+============================
+- deleteModal: Used across multiple pages for confirmation
+- bookingModal: Primary booking management modal
+- editWaiverModal: Accessible from navigation
+- checkInModal: Used for manual check-ins
+- embedCodeModal: Used for generating embed codes 

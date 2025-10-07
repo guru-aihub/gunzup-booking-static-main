@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        
+        #testCanvas {
+            border: 2px solid #333;
+            background: white;
+            cursor: crosshair;
+            display: block;
+            margin: 20px 0;
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        .status {
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas Drawing Test</h1>
+    <p>Try drawing on the canvas below with your mouse. This tests basic canvas functionality without SignaturePad.</p>
+    
+    <canvas id="testCanvas" width="600" height="300"></canvas>
+    
+    <div class="controls">
+        <button onclick="clearCanvas()">Clear Canvas</button>
+        <button onclick="testDraw()">Test Draw (Automated)</button>
+        <button onclick="saveCanvas()">Save as PNG</button>
+    </div>
+    
+    <div id="status" class="status">Ready - try drawing on the canvas</div>
+
+    <script>
+        const canvas = document.getElementById('testCanvas');
+        const ctx = canvas.getContext('2d');
+        const status = document.getElementById('status');
+        
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        // Set up canvas
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+
+        function updateStatus(message) {
+            status.textContent = message;
+            console.log(message);
+        }
+
+        // Mouse events
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            lastX = e.clientX - rect.left;
+            lastY = e.clientY - rect.top;
+            updateStatus('Started drawing at: ' + lastX + ', ' + lastY);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const currentX = e.clientX - rect.left;
+            const currentY = e.clientY - rect.top;
+            
+            // Draw line
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            
+            lastX = currentX;
+            lastY = currentY;
+            
+            updateStatus('Drawing at: ' + currentX + ', ' + currentY);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            updateStatus('Stopped drawing');
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDrawing = false;
+            updateStatus('Mouse left canvas');
+        });
+
+        // Touch events for mobile
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            lastX = touch.clientX - rect.left;
+            lastY = touch.clientY - rect.top;
+            isDrawing = true;
+            updateStatus('Touch started at: ' + lastX + ', ' + lastY);
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const currentX = touch.clientX - rect.left;
+            const currentY = touch.clientY - rect.top;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            
+            lastX = currentX;
+            lastY = currentY;
+            
+            updateStatus('Touch drawing at: ' + currentX + ', ' + currentY);
+        });
+
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            isDrawing = false;
+            updateStatus('Touch ended');
+        });
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            updateStatus('Canvas cleared');
+        }
+
+        function testDraw() {
+            updateStatus('Running automated test draw...');
+            
+            // Draw a test pattern
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 3;
+            
+            // Draw X pattern
+            ctx.beginPath();
+            ctx.moveTo(50, 50);
+            ctx.lineTo(150, 150);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(150, 50);
+            ctx.lineTo(50, 150);
+            ctx.stroke();
+            
+            // Draw circle
+            ctx.beginPath();
+            ctx.arc(300, 100, 50, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            updateStatus('Automated test completed - you should see red X and circle');
+        }
+
+        function saveCanvas() {
+            const link = document.createElement('a');
+            link.download = 'canvas-test-' + new Date().toISOString().slice(0, 19).replace(/:/g, '-') + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            updateStatus('Canvas saved as PNG');
+        }
+
+        // Initialize
+        updateStatus('Canvas test ready - try drawing with mouse or touch');
+    </script>
+</body>
+</html> 

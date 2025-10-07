@@ -1,0 +1,822 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*PAGE LAYOUT FIXES /////////////////////////////////////////////////////////*/
+/* Ensure proper page content height and footer positioning */
+.page-content {
+  min-height: calc(100vh - 120px);
+  padding-bottom: 2rem;
+}
+
+/* Prevent horizontal page scrolling while allowing table scrolling */
+html, body {
+  overflow-x: hidden !important;
+}
+
+.wrapper {
+  overflow-x: hidden;
+}
+
+/*TABLE RESPONSIVE FIXES /////////////////////////////////////////////////////////*/
+/* Force horizontal scrolling for tables even when body has overflow-x: hidden */
+.table-responsive {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  width: 100% !important;
+}
+
+/* Ensure table content can trigger horizontal scroll */
+.table-responsive .table {
+  min-width: 800px; /* Set minimum width to force scrolling on small screens */
+  white-space: nowrap;
+}
+
+/* Make sure card container doesn't prevent scrolling */
+.card.overflow-hidden .table-responsive {
+  overflow-x: auto !important;
+}
+
+/* Fix for legacy table-centered structures throughout project */
+.table-responsive.table-centered {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  width: 100% !important;
+}
+
+.table-responsive.table-centered .table {
+  min-width: 800px !important;
+  white-space: nowrap !important;
+}
+
+/* Ensure all table containers can scroll regardless of structure */
+div[class*="table-responsive"] {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+div[class*="table-responsive"] .table {
+  min-width: 800px !important;
+}
+
+/*TABLE FOOTER RESPONSIVE LAYOUT /////////////////////////////////////////////////////////*/
+/* Mobile responsive fixes for table pagination and buttons */
+@media (max-width: 768px) {
+  /* Make table footer stack vertically on mobile */
+  .card-body .row.border-top,
+  .border-top .row,
+  .row.border-top {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  
+  /* Only add padding if element doesn't already have p-3 class */
+  .card-body .row.border-top:not(.p-3),
+  .border-top .row:not(.p-3),
+  .row.border-top:not(.p-3) {
+    padding: 1rem !important;
+  }
+  
+  /* Center pagination on mobile */
+  .card-body .row.border-top .col-sm-auto,
+  .border-top .row .col-sm-auto,
+  .row.border-top .col-sm-auto {
+    order: 1;
+    margin: 1rem 0 !important;
+    text-align: center !important;
+  }
+  
+  /* Center pagination items */
+  .pagination {
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Make buttons full width on mobile */
+  .card-body .row.border-top .col-sm:last-child,
+  .border-top .row .col-sm:last-child,
+  .row.border-top .col-sm:last-child {
+    order: 2;
+    margin-top: 1rem !important;
+    text-align: center !important;
+  }
+  
+  .card-body .row.border-top .col-sm:last-child .btn,
+  .border-top .row .col-sm:last-child .btn,
+  .row.border-top .col-sm:last-child .btn {
+    width: 100% !important;
+    display: block !important;
+  }
+  
+  /* Move showing text to top */
+  .card-body .row.border-top .col-sm:first-child,
+  .border-top .row .col-sm:first-child,
+  .row.border-top .col-sm:first-child {
+    order: 0;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Stack multiple buttons */
+  .card-body .row.border-top .col-sm:last-child .btn + .btn,
+  .border-top .row .col-sm:last-child .btn + .btn,
+  .row.border-top .col-sm:last-child .btn + .btn {
+    margin-top: 0.5rem !important;
+    margin-left: 0 !important;
+  }
+  
+  /* Override inline styles that prevent centering */
+  .row.border-top .col-sm[style*="text-align: right"] {
+    text-align: center !important;
+  }
+}
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+  .pagination {
+    font-size: 0.875rem;
+  }
+  
+  .pagination .page-link {
+    padding: 0.375rem 0.5rem;
+  }
+  
+  /* Ensure buttons have proper spacing */
+  .card-body .row.border-top .col-sm:last-child,
+  .border-top .row .col-sm:last-child,
+  .row.border-top .col-sm:last-child {
+    padding: 0 0.5rem;
+  }
+}
+
+/*NAV /////////////////////////////////////////////////////////*/
+.logo-lg {
+  height: 44px !important;
+  margin: 20px;
+}
+
+/* NAVIGATION - Base styling with margin and border radius */
+.main-nav .nav-link {
+  margin: 0 8px !important; /* Add margin around edges */
+  border-radius: 5px !important; /* 5px border radius */
+}
+
+/* NAVIGATION HOVER & ACTIVE STATES - Replace gradient with solid blue */
+.main-nav .nav-link:hover,
+.main-nav .nav-link:focus,
+.main-nav .nav-link.active {
+  background: #1c84ee !important; /* Solid blue instead of gradient */
+  background-image: none !important; /* Remove any gradient */
+  color: white !important; /* Ensure text is white on blue background */
+}
+
+/* Sub-navigation - Base styling with margin and border radius */
+.main-nav .sub-nav-link {
+  margin: 0 8px !important; /* Add margin around edges */
+  border-radius: 5px !important; /* 5px border radius */
+}
+
+/* Sub-navigation items hover & active styling */
+.main-nav .sub-nav-link:hover,
+.main-nav .sub-nav-link:focus,
+.main-nav .sub-nav-link.active {
+  background: rgba(145, 155, 165, .5)!important; /* Light grey instead of blue */
+  background-image: none !important; /* Remove any gradient */
+  color: #495057 !important; /* Dark grey text for contrast on light grey background */
+}
+
+/* Ensure main nav icons turn white on hover/active */
+.main-nav .nav-link:hover .nav-icon,
+.main-nav .nav-link:focus .nav-icon,
+.main-nav .nav-link.active .nav-icon {
+  color: white !important;
+}
+
+/* Ensure dropdown arrow icons also turn white on hover/active */
+.main-nav .nav-link.menu-arrow:hover::after,
+.main-nav .nav-link.menu-arrow:focus::after,
+.main-nav .nav-link.menu-arrow.active::after {
+  color: white !important;
+  border-color: white !important; /* In case arrows are made with borders */
+}
+
+/* Alternative targeting for dropdown arrows if they use different selectors */
+.main-nav .nav-link:hover::after,
+.main-nav .nav-link:focus::after,
+.main-nav .nav-link.active::after {
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Additional targeting for any arrow elements or pseudo-elements */
+.main-nav .nav-link:hover .dropdown-toggle::after,
+.main-nav .nav-link:focus .dropdown-toggle::after,
+.main-nav .nav-link.active .dropdown-toggle::after,
+.main-nav .nav-link:hover::before,
+.main-nav .nav-link:focus::before,
+.main-nav .nav-link.active::before {
+  color: white !important;
+  border-color: white !important;
+}
+
+/* Comprehensive catch-all for any dropdown arrows in main navigation */
+.main-nav .nav-link:hover *,
+.main-nav .nav-link:focus *,
+.main-nav .nav-link.active * {
+  color: white !important;
+}
+
+/* Ensure sub-nav items and text turn dark grey on hover/active */
+.main-nav .sub-nav-link:hover,
+.main-nav .sub-nav-link:focus,
+.main-nav .sub-nav-link.active {
+  color: #fff !important;
+}
+
+/*TABLES //////////////////////////////////////////////////////////*/
+.search-drop-bar{
+  width: 300px;
+  float: left;
+}
+
+table tr td:first-child, table th td:first-child{text-align: left!important;}
+table tr td:last-child, table th td:last-child{text-align: right!important;}
+/*WAIVER /////////////////////////////////////////////////////////*/
+.waiver-logo {
+  margin: 0 auto 40px;
+  display: block;
+}
+.signature {
+  width: 100%;
+  padding: 100px 10px;
+  align-items: center;
+  text-align: center;
+  font-size: 3em;
+  background-color: #eee;
+  text-transform: uppercase;
+  color: #aaa;
+  border-radius: 20px;
+}
+.embed-styles {
+  border-radius: 8px;
+  background-color: #b1bbcb;
+  color:#999;
+}
+.embed-styles div {
+  border-radius: 8px;
+  padding: 10px
+}
+
+.embed-styles span.featured-img {
+    height: 90px;
+    display: block!important;
+   
+}
+.embed-styles span {
+  background-color: #d3dbe6;
+  min-height: 20px;
+  clear: both;
+  display: block;
+  border-radius: 8px;
+    margin-bottom: 3px;
+}
+.embed-styles h1 {
+  text-transform: uppercase;
+  color: #999;
+  font-size: 1.6em;
+  margin: 1em 0 .5em;
+  line-height: 1;
+}
+
+.embed-styles-calendar {
+  border-radius: 8px;
+  color: #999;
+}
+.embed-styles-calendar div {
+  border-radius: 8px;
+  padding: 3px
+}
+.embed-styles-calendar span.featured-img {
+    display: block;
+    height: 40px;
+    background-color: rgba(var(--bs-light-rgb), 1);
+}
+.embed-styles-calendar{
+  margin: 0px auto;
+  padding: 0px!important;
+}
+.embed-styles-calendar span{
+  display:none!important;
+}
+.form-control-color{
+ margin-right: 6px;
+}
+.embedcolors span {border-radius:10px; padding:10px;}
+.embedcolors .embed-bg{background-color:#dfe3e9}
+.embedcolors .embed-title{background-color:#dae0e7}
+.embedcolors .embed-desc{background-color:#dae0e7}
+p.devmessage{font-weight:bold; color:red;}
+
+/*AUTHENTICATION PAGES /////////////////////////////////////////////////////////*/
+/* Override the blue background with grey */
+body.authentication-bg {
+  background: url(assets/images/bg-overlay.svg) #6c757d !important;
+}
+
+/*NUMBER INPUT SPINNERS /////////////////////////////////////////////////////////*/
+/* Default: Make number input spinner buttons always visible */
+.form-control[type="number"]::-webkit-outer-spin-button,
+.form-control[type="number"]::-webkit-inner-spin-button {
+  opacity: 1 !important;
+  height: auto;
+  -webkit-appearance: auto;
+}
+
+/* Ensure the input field shows spinners */
+.form-control[type="number"] {
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+}
+
+/* Remove spinner arrows from price number inputs */
+.price-field::-webkit-outer-spin-button,
+.price-field::-webkit-inner-spin-button,
+#giftCertPrice::-webkit-outer-spin-button,
+#giftCertPrice::-webkit-inner-spin-button,
+#createGiftCertPrice::-webkit-outer-spin-button,
+#createGiftCertPrice::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox - Remove spinners from price fields */
+.price-field[type=number],
+#giftCertPrice[type=number],
+#createGiftCertPrice[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Keep spinners for quantity fields (override the price field styles) */
+.spinner-field::-webkit-outer-spin-button,
+.spinner-field::-webkit-inner-spin-button {
+  -webkit-appearance: auto !important;
+  margin: 0;
+}
+
+.spinner-field[type=number] {
+  -moz-appearance: auto !important;
+}
+
+/*DARK MODE OVERRIDES /////////////////////////////////////////////////////////*/
+/* Change dark mode background from #22282e to dark neutral grey */
+[data-bs-theme='dark'] body,
+html[data-bs-theme='dark'] body {
+  background-color: #1d2226 !important; /* Dark neutral grey instead of #22282e */
+}
+
+/* Also override any containers or page content areas that might use the same color */
+[data-bs-theme='dark'] .page-content,
+[data-bs-theme='dark'] .page-content .container-xxl,
+[data-bs-theme='dark'] .wrapper {
+  background-color: #1d2226 !important;
+}
+
+/*BUTTON STYLING /////////////////////////////////////////////////////////*/
+/* Remove box-shadow from all buttons */
+.btn,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  box-shadow: none !important;
+}
+
+/* Also remove focus and hover shadows */
+.btn:focus,
+.btn:hover,
+.btn:active,
+button:focus,
+button:hover,
+button:active,
+input[type="button"]:focus,
+input[type="button"]:hover,
+input[type="button"]:active,
+input[type="submit"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:active,
+input[type="reset"]:focus,
+input[type="reset"]:hover,
+input[type="reset"]:active {
+  box-shadow: none !important;
+}
+
+/*DARK MODE TEXT BRIGHTNESS /////////////////////////////////////////////////////////*/
+/* Brighten text in dark mode - much brighter for better visibility */
+[data-bs-theme='dark'] body,
+[data-bs-theme='dark'] .page-content,
+[data-bs-theme='dark'] p,
+[data-bs-theme='dark'] span,
+[data-bs-theme='dark'] div,
+[data-bs-theme='dark'] td,
+[data-bs-theme='dark'] th,
+[data-bs-theme='dark'] li,
+[data-bs-theme='dark'] label {
+  color: #e8f1fc !important; /* Much brighter text */
+}
+
+/* Brighten headings in dark mode */
+[data-bs-theme='dark'] h1,
+[data-bs-theme='dark'] h2,
+[data-bs-theme='dark'] h3,
+[data-bs-theme='dark'] h4,
+[data-bs-theme='dark'] h5,
+[data-bs-theme='dark'] h6 {
+  color: #f5f9fd !important; /* Very bright for headings */
+}
+
+/* Brighten card text content */
+[data-bs-theme='dark'] .card-body,
+[data-bs-theme='dark'] .card-text,
+[data-bs-theme='dark'] .card-title {
+  color: #e8f1fc !important;
+}
+
+/* Fix dropdown visibility in tables */
+.table-responsive {
+  overflow: visible !important;
+}
+
+.choices {
+  position: relative;
+  z-index: 1050;
+}
+
+.choices__list--dropdown {
+  position: absolute;
+  z-index: 1051;
+  overflow-y: auto;
+}
+
+
+
+
+
+/* Fix dropdown visibility in modals - simple approach */
+.modal-body {
+  overflow: visible !important;
+}
+
+.modal .modal-content {
+  overflow: visible !important;
+}
+
+.modal-dialog {
+  overflow: visible !important;
+}
+
+/* Make all rows positioned so z-index works - JavaScript will handle specific values */
+#discounted-addons-container .discount-addon-row {
+  position: relative;
+}
+
+
+
+/* Add-on rows z-index management - each row higher than the one below */
+#available-addons-container .available-addon-row {
+  position: relative;
+}
+
+#available-addons-container .available-addon-row:nth-child(1) { z-index: 1050; }
+#available-addons-container .available-addon-row:nth-child(2) { z-index: 1049; }
+#available-addons-container .available-addon-row:nth-child(3) { z-index: 1048; }
+#available-addons-container .available-addon-row:nth-child(4) { z-index: 1047; }
+#available-addons-container .available-addon-row:nth-child(5) { z-index: 1046; }
+#available-addons-container .available-addon-row:nth-child(6) { z-index: 1045; }
+#available-addons-container .available-addon-row:nth-child(7) { z-index: 1044; }
+#available-addons-container .available-addon-row:nth-child(8) { z-index: 1043; }
+#available-addons-container .available-addon-row:nth-child(9) { z-index: 1042; }
+#available-addons-container .available-addon-row:nth-child(10) { z-index: 1041; }
+
+/* Ensure add-on dropdown choices containers inherit proper z-index */
+#available-addons-container .available-addon-row .choices {
+  position: relative;
+  z-index: inherit;
+}
+
+#available-addons-container .available-addon-row .choices__list--dropdown {
+  position: absolute !important;
+  z-index: inherit;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Base styling for dropdowns in modals */
+.modal .choices__list--dropdown {
+  position: absolute !important;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+
+
+/* Brighten date range button text and background in dark mode - targeting the specific button */
+[data-bs-theme='dark'] .btn-soft-secondary {
+  color: #ffffff !important; /* Pure white text for date range button */
+  background-color: #495057 !important; /* Brighter background */
+  border-color: #6c757d !important; /* Slightly brighter border */
+}
+
+/* Template list scrollable container */
+.template-list {
+  max-height: 180px;
+}
+
+/* Email Out a Waiver - Send Button Responsive Styling */
+/* Make button full width on mobile and small screens */
+@media (max-width: 768px) {
+    .email-waiver-send-btn {
+        width: 100% !important;
+        margin-top: 15px;
+    }
+    
+    /* Ensure the column takes full width on mobile */
+    .email-waiver-btn-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/*DRAG AND DROP STYLES /////////////////////////////////////////////////////////*/
+/* Drag and Drop functionality for tables */
+.draggable-row {
+    transition: background-color 0.2s ease;
+}
+
+.draggable-row:hover {
+    background-color: rgba(145, 155, 165, .5);
+    
+}
+
+.dragging {
+    opacity: 0.5;
+    background-color: #e3f2fd !important;
+}
+
+.drag-over {
+    border-top: 2px solid #ffc107;
+}
+
+.drag-handle {
+    cursor: grab;
+    padding: 8px;
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+
+.drag-handle:hover {
+    color: #495057;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/*MODAL STYLES /////////////////////////////////////////////////////////*/
+/* Modal fade effect for parent modal */
+.modal.modal-faded {
+    opacity: 0.3 !important;
+    transition: opacity 0.3s ease;
+}
+
+.modal:not(.modal-faded) {
+    opacity: 1 !important;
+    transition: opacity 0.3s ease;
+}
+
+/* Fix z-index issues for dropdown menus in modals */
+.modal .choices__list--dropdown {
+    z-index: 9999 !important;
+}
+
+/* Ensure add-on dropdown containers have proper z-index stacking */
+#available-addons-container .available-addon-row,
+#create-available-addons-container .available-addon-row {
+    position: relative;
+    z-index: 1050;
+}
+
+/* Higher z-index for focused/active dropdowns */
+.modal .choices.is-open .choices__list--dropdown {
+    z-index: 10000 !important;
+}
+
+/* Ensure choices containers don't get cut off */
+.modal .choices {
+    position: relative;
+    z-index: 1600;
+}
+
+/* SIMPLE FIX: Booked Package dropdown above Add-ons */
+#bookingModal #booked-package + .choices {
+    z-index: 1500 !important;
+    position: relative;
+}
+
+#bookingModal #booked-package + .choices .choices__list--dropdown {
+    z-index: 1500 !important;
+}
+
+/* Lower z-index for booking modal add-ons container */
+#bookingModal #available-addons-container-booking {
+    z-index: 1400 !important;
+    position: relative;
+}
+
+#bookingModal #available-addons-container-booking .choices {
+    z-index: 1400 !important;
+}
+
+#bookingModal #available-addons-container-booking .choices .choices__list--dropdown {
+    z-index: 1400 !important;
+}
+
+/* Fix for search dropdown scrolling in tables */
+.choices__list--dropdown {
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* Lower z-index for search dropdowns in main content (not in modals) */
+.search-drop-bar .choices__list--dropdown {
+    z-index: 1045 !important;
+}
+
+/* Ensure search dropdowns stay below modals even when active */
+.search-drop-bar .choices.is-open .choices__list--dropdown {
+    z-index: 1045 !important;
+}
+
+/* Custom scrollbar styling for webkit browsers */
+.choices__list--dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.choices__list--dropdown::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.choices__list--dropdown::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.choices__list--dropdown::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Ensure dropdown positioning doesn't get cut off */
+.search-drop-bar .choices {
+    position: relative;
+    z-index: 1040;
+}
+
+.search-drop-bar .choices[data-type*="select-one"] .choices__inner {
+    padding-bottom: 7.5px;
+    padding-top: 7.5px;
+}
+
+/* Ensure search results are visible */
+.choices__list--dropdown .choices__item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.choices__list--dropdown .choices__item:last-child {
+    border-bottom: none;
+}
+
+/* BOOKING FLOW STYLES - Time slots and calendar */
+/* Time slot styles */
+.time-slot {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    width: 100%;
+    display: block;
+    font-size: 14px;
+}
+
+.time-slot:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.time-slot.selected {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.time-slot.unavailable {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.time-slot.unavailable:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Calendar styles for booking calendars */
+.fc-day.available-date,
+.fc-daygrid-day.available-date {
+    background-color: #8cb43d !important;
+    cursor: pointer !important;
+}
+
+.fc-day.booked-out-date,
+.fc-daygrid-day.booked-out-date {
+    background-color: #9ba588 !important;
+    cursor: not-allowed !important;
+    opacity: 0.8 !important;
+}
+
+.fc-day.available-date.selected-date {
+    background-color: #8cb43d !important;
+    border: 3px solid #ffffff !important;
+    box-sizing: border-box;
+}
+
+.fc-day.available-date.selected-date .fc-daygrid-day-number {
+    font-weight: bold;
+}
+
+.fc-day.available-date:hover {
+    background-color: #7ba235 !important;
+}
+
+.fc-day.booked-out-date:hover {
+    background-color: #9ba588 !important;
+    cursor: not-allowed;
+}
+
+.fc-day-past {
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.fc-day-future:not(.available-date):not(.booked-out-date) {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.fc-day-future:not(.available-date):not(.booked-out-date):hover {
+    background-color: #e9ecef;
+}
+
+.fc-daygrid-day {
+    border: 3px solid #dee2e6 !important;
+    box-sizing: border-box !important;
+}
+
+.fc-toolbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.fc-legend-button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: default !important;
+    color: inherit !important;
+}
+
+.fc-legend-button:hover,
+.fc-legend-button:focus,
+.fc-legend-button:active {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: inherit !important;
+}
+
+.fc-legend-button small {
+    color: inherit !important;
+}
+
+
